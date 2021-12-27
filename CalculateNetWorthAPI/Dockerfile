@@ -7,10 +7,9 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["CalculateNetWorthAPI/CalculateNetWorthAPI.csproj", "CalculateNetWorthAPI/"]
-RUN dotnet restore "CalculateNetWorthAPI/CalculateNetWorthAPI.csproj"
+COPY *.csproj ./
+RUN dotnet restore "CalculateNetWorthAPI.csproj"
 COPY . .
-WORKDIR "/src/CalculateNetWorthAPI"
 RUN dotnet build "CalculateNetWorthAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
